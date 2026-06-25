@@ -1,0 +1,97 @@
+https://youtube.com/shorts/7msVKzNr-ac
+
+
+int redPin=3;
+int greenPin=2;
+int quickBeep=200;
+int slowBeep=500;
+int endWait=1000;
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(redPin,OUTPUT);
+pinMode(greenPin,OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+
+digitalWrite(greenPin, HIGH);
+delay(quickBeep);
+digitalWrite(greenPin, LOW);
+delay(quickBeep);
+
+digitalWrite(greenPin, HIGH);
+delay(quickBeep);
+digitalWrite(greenPin, LOW);
+delay(quickBeep);
+
+digitalWrite(greenPin, HIGH);
+delay(quickBeep);
+digitalWrite(greenPin, LOW);
+delay(quickBeep);
+
+digitalWrite(greenPin, HIGH);
+delay(quickBeep);
+digitalWrite(greenPin, LOW);
+delay(quickBeep);
+
+digitalWrite(greenPin, HIGH);
+delay(quickBeep);
+digitalWrite(greenPin, LOW);
+delay(quickBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+digitalWrite(redPin, HIGH);
+delay(slowBeep);
+digitalWrite(redPin, LOW);
+delay(slowBeep);
+
+delay(endWait);
+
+
+}
