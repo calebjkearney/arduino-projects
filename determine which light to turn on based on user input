@@ -1,0 +1,48 @@
+https://youtube.com/shorts/x0nckVkRWMM
+
+
+String myPrompt = "Enter a color, red, green, or yellow: ";
+int redPin=4;
+int greenPin=6;
+int yellowPin=2;
+int br=9600;
+String myColor;
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(br);
+pinMode(redPin, OUTPUT);
+pinMode(greenPin, OUTPUT);
+pinMode(yellowPin, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+Serial.println(myPrompt);
+while (Serial.available()==0){
+
+}
+myColor=Serial.readString();
+myColor.toLowerCase();
+if (myColor=="red"){
+digitalWrite(redPin, HIGH);
+digitalWrite(greenPin, LOW);
+digitalWrite(yellowPin, LOW);
+}
+if (myColor=="green"){
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, HIGH);
+digitalWrite(yellowPin, LOW);
+}
+if (myColor=="yellow"){
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, LOW);
+digitalWrite(yellowPin, HIGH);
+}
+if (myColor!="red" && myColor!="green" && myColor!="yellow") {
+Serial.println("Please enter a valid color");
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, LOW);
+digitalWrite(yellowPin, LOW);
+}
+}
