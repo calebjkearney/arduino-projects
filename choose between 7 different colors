@@ -1,0 +1,74 @@
+https://youtube.com/shorts/BEjj8ZJRAmg
+
+int redPin=9;
+int greenPin=10;
+int bluePin=11;
+int br=115200;
+String myPrompt="Enter a color, red, green, blue, cyan, yellow, purple, or white: ";
+String myColor;
+String failMessage="Please enter a valid color";
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(br);
+pinMode(redPin, OUTPUT);
+pinMode(greenPin, OUTPUT);
+pinMode(bluePin, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+Serial.println(myPrompt);
+while(Serial.available()==0){
+
+}
+myColor=Serial.readString();
+myColor.toLowerCase();
+if(myColor=="red"){
+digitalWrite(redPin, HIGH);
+digitalWrite(greenPin, LOW);
+digitalWrite(bluePin, LOW);
+}
+
+if(myColor=="blue"){
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, LOW);
+digitalWrite(bluePin, HIGH);
+}
+
+if(myColor=="green"){
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, HIGH);
+digitalWrite(bluePin, LOW);
+}
+
+if(myColor=="purple"){
+digitalWrite(redPin, HIGH);
+digitalWrite(greenPin, LOW);
+digitalWrite(bluePin, HIGH);
+}
+
+if(myColor=="yellow"){
+digitalWrite(redPin, HIGH);
+digitalWrite(greenPin, HIGH);
+digitalWrite(bluePin, LOW);
+}
+
+if(myColor=="cyan"){
+digitalWrite(redPin, LOW);
+digitalWrite(greenPin, HIGH);
+digitalWrite(bluePin, HIGH);
+}
+
+if(myColor=="white"){
+digitalWrite(redPin, HIGH);
+digitalWrite(greenPin, HIGH);
+digitalWrite(bluePin, HIGH);
+}
+
+if(myColor!="red" && myColor!="blue" && myColor!="green" && myColor!="white" && myColor!="yellow" && myColor!="cyan" && myColor!="purple"){
+Serial.println(failMessage);
+}
+}
+
+ // Purple is BlueRed, Yellow is RedGreen, Cyan is BlueGreen, White is ALL
