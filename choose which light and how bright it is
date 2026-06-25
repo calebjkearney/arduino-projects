@@ -1,0 +1,73 @@
+https://youtube.com/shorts/Se4B85rLPlk
+
+
+String myPrompt = "Enter a color, red, green, or yellow: ";
+int redPin=9;
+int greenPin=10;
+int yellowPin=11;
+int br=9600;
+String myColor;
+int myBrightness;
+float trueBright;
+String brightAsk = "How bright (0-10) would you like the light? ";
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(br);
+pinMode(redPin, OUTPUT);
+pinMode(greenPin, OUTPUT);
+pinMode(yellowPin, OUTPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+Serial.println(myPrompt);
+while (Serial.available()==0){
+
+}
+myColor=Serial.readString();
+myColor.toLowerCase();
+if (myColor=="red"){
+Serial.println(brightAsk);
+while (Serial.available()==0){
+
+}
+myBrightness=Serial.parseInt();
+trueBright=pow(2,myBrightness/1.25)-1;
+
+analogWrite(redPin, trueBright);
+analogWrite(greenPin, 0);
+analogWrite(yellowPin, 0);
+}
+
+if (myColor=="green"){
+Serial.println(brightAsk);
+while (Serial.available()==0){
+
+}
+myBrightness=Serial.parseInt();
+trueBright=pow(2,myBrightness/1.25)-1;
+analogWrite(redPin, 0);
+analogWrite(greenPin, trueBright);
+analogWrite(yellowPin, 0);
+}
+
+if (myColor=="yellow"){
+Serial.println(brightAsk);
+while (Serial.available()==0){
+
+}
+myBrightness=Serial.parseInt();
+trueBright=pow(2,myBrightness/1.25)-1;
+analogWrite(redPin, 0);
+analogWrite(greenPin, 0);
+analogWrite(yellowPin, trueBright);
+}
+
+if (myColor!="red" && myColor!="green" && myColor!="yellow") {
+Serial.println("Please enter a valid color");
+analogWrite(redPin, 0);
+analogWrite(greenPin, 0);
+analogWrite(yellowPin, 0);
+}
+}
