@@ -1,0 +1,30 @@
+https://youtube.com/shorts/_8BCjx5qgwM
+
+int potPin=A2;
+int potVal;
+int br=9600;
+int waitT=50;
+int redPin=9;
+int writeVal;
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(potPin,INPUT);
+Serial.begin(br);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+potVal=analogRead(potPin);
+writeVal=pow(2,potVal/127.875)-1;
+Serial.print("potVal: ");
+Serial.print(potVal);
+Serial.print(" Brightness: ");
+Serial.println(writeVal);
+analogWrite(redPin, writeVal);
+delay(waitT);
+}
+
+
+
+*this code is not the code used in the video, this code uses exponents, while the video demonstration shows linear calculations*
