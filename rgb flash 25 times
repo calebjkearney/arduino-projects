@@ -1,0 +1,59 @@
+https://youtube.com/shorts/DhQkvXcBgTw
+
+
+int redPin=9;
+int greenPin=10;
+int bluePin=11;
+int br=115200;
+int counter;
+int shortTime=350;
+int waitTime=1000;
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(br);
+pinMode(redPin, OUTPUT);
+pinMode(greenPin, OUTPUT);
+pinMode(bluePin, OUTPUT);
+counter=1;
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+while (counter<=25){
+  //red
+analogWrite(redPin,255);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 0);
+delay(shortTime);
+
+//green
+analogWrite(redPin,0);
+analogWrite(greenPin, 255);
+analogWrite(bluePin, 0);
+delay(shortTime);
+
+//blue
+analogWrite(redPin,0);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 255);
+delay(shortTime);
+
+analogWrite(redPin,0);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 255);
+delay(shortTime);
+
+//wait
+analogWrite(redPin,0);
+analogWrite(greenPin, 0);
+analogWrite(bluePin, 0);
+delay(waitTime);
+
+counter=counter+1;
+}
+
+}
+
+
+
