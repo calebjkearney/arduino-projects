@@ -1,0 +1,28 @@
+https://youtube.com/shorts/PPoWOnelaIk
+
+#include <Servo.h>
+int servoPin=9;
+int servoAngle;
+int br=115200;
+Servo myServo;
+int potPin=A2;
+int potVal;
+int writeVal;
+int dt=50;
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(br);
+myServo.attach(servoPin);
+myServo.write(0);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+potVal=analogRead(potPin);
+Serial.println(writeVal);
+writeVal=(potVal*(180./1023.));
+myServo.write(writeVal);
+delay(dt);
+
+}
