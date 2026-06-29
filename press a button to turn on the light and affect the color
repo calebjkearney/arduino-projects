@@ -1,0 +1,74 @@
+https://youtube.com/shorts/lM65XErnhQI
+
+
+int redBut=2;
+int greenBut=3;
+int blueBut=4;
+int redPin=9;
+int greenPin=10;
+int bluePin=11;
+int br=115200;
+int redButVal=1;
+int redButValOld=1;
+int redLEDstate=0;
+int greenButVal=1;
+int greenButValOld=1;
+int greenLEDstate=0;
+int blueButVal=1;
+int blueButValOld=1;
+int blueLEDstate=0;
+int dt=50;
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(br);
+pinMode(redPin,OUTPUT);
+pinMode(redBut,INPUT);
+pinMode(greenPin,OUTPUT);
+pinMode(greenBut,INPUT);
+pinMode(bluePin,OUTPUT);
+pinMode(blueBut,INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+redButVal=digitalRead(redBut);
+if (redButValOld==0 && redButVal==1){
+if (redLEDstate==0){
+  digitalWrite(redPin,HIGH);
+}
+if (redLEDstate==1){
+  digitalWrite(redPin,LOW);
+}
+redLEDstate=!redLEDstate;
+}
+redButValOld=redButVal;
+delay(dt);
+
+greenButVal=digitalRead(greenBut);
+if (greenButValOld==0 && greenButVal==1){
+if (greenLEDstate==0){
+  digitalWrite(greenPin,HIGH);
+}
+if (greenLEDstate==1){
+  digitalWrite(greenPin,LOW);
+}
+greenLEDstate=!greenLEDstate;
+}
+greenButValOld=greenButVal;
+delay(dt);
+
+blueButVal=digitalRead(blueBut);
+if (blueButValOld==0 && blueButVal==1){
+if (blueLEDstate==0){
+  digitalWrite(bluePin,HIGH);
+}
+if (blueLEDstate==1){
+  digitalWrite(bluePin,LOW);
+}
+blueLEDstate=!blueLEDstate;
+}
+blueButValOld=blueButVal;
+delay(dt);
+
+}
