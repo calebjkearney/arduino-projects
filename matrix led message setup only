@@ -1,0 +1,10 @@
+void loop() {
+  // put your main code here, to run repeatedly:
+matrix.beginDraw();
+matrix.textScrollSpeed(50);
+matrix.textFont(Font_5x7);
+matrix.beginText(0,1,255,0,0);
+matrix.println(message);
+matrix.endText(SCROLL_LEFT);
+matrix.endDraw();
+}
