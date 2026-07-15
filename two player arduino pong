@@ -29,8 +29,8 @@ int pongVal2=5;
 int counter1;
 int counter2;
 int interval=10;
-String message1="    Player 1 (R/G) Loses!    ";
-String message2="    Player 2 (B/Y) Loses!    ";
+String message2="    Player 1 (R/B) Wins!    ";
+String message1="    Player 2 (G/Y) Wins!    ";
 int i;
 int j;
 
