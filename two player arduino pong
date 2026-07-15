@@ -1,0 +1,160 @@
+https://youtube.com/shorts/xFuP2Ff__Dc
+
+
+#include "ArduinoGraphics.h"
+#include "Arduino_LED_Matrix.h"
+ArduinoLEDMatrix matrix;
+
+int br=115200;
+int dt=150;
+int dts=50;
+int xPos=3;
+int yPos=2;
+int deltaX=1;
+int deltaY=1;
+int redBut=5;
+int blueBut=6;
+int greenBut=4;
+int yellowBut=3;
+int redButVal=1;
+int blueButVal=1;
+int redButValOld=1;
+int blueButValOld=1;
+int greenButVal=1;
+int yellowButVal=1;
+int greenButValOld=1;
+int yellowButValOld=1;
+int pongVal1=5;
+int pongVal2=5;
+int counter1;
+int counter2;
+int interval=10;
+String message1="    Player 1 (R/G) Loses!    ";
+String message2="    Player 2 (B/Y) Loses!    ";
+int i;
+int j;
+
+byte frame[8][12];
+
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(br);
+matrix.begin();
+pinMode(redBut,INPUT_PULLUP);
+pinMode(blueBut,INPUT_PULLUP);
+pinMode(greenBut,INPUT_PULLUP);
+pinMode(yellowBut,INPUT_PULLUP);
+}
+void loop() {
+  // put your main code here, to run repeatedly:
+for(i=0;i<=11;i=i+1){
+for(j=0;j<=7;j=j+1){
+frame[j][i]=0;
+if(i==xPos && j==yPos){
+frame[j][i]=1;
+
+
+}
+
+
+}
+
+
+}
+frame[pongVal1][0]=1;
+frame[pongVal2][11]=1;
+blueButVal=digitalRead(blueBut);
+if (blueButValOld==0 && blueButVal==1){
+pongVal1=pongVal1+1;
+if (pongVal1<0){
+pongVal1=0;
+}
+if (pongVal1>7){
+pongVal1=7;
+}
+}
+blueButValOld=blueButVal;
+redButVal=digitalRead(redBut);
+if (redButValOld==0 && redButVal==1){
+pongVal1=pongVal1-1;
+if (pongVal1<0){
+pongVal1=0;
+}
+if (pongVal1>7){
+pongVal1=7;
+}
+}
+redButValOld=redButVal;
+
+greenButVal=digitalRead(greenBut);
+if (greenButValOld==0 && greenButVal==1){
+pongVal2=pongVal2+1;
+if (pongVal2<0){
+pongVal2=0;
+}
+if (pongVal2>7){
+pongVal2=7;
+}
+}
+greenButValOld=greenButVal;
+yellowButVal=digitalRead(yellowBut);
+if (yellowButValOld==0 && yellowButVal==1){
+pongVal2=pongVal2-1;
+if (pongVal2<0){
+pongVal2=0;
+}
+if (pongVal2>7){
+pongVal2=7;
+}
+}
+yellowButValOld=yellowButVal;
+
+
+matrix.renderBitmap(frame,8,12);
+counter1=counter1+1;
+if(counter1>=interval){
+counter1=0;
+if(xPos>=11 || xPos<=0){
+deltaX=-deltaX;
+}
+if(yPos>=7 || yPos<=0){
+deltaY=-deltaY;
+
+
+}
+
+xPos=xPos+deltaX;
+yPos=yPos+deltaY;
+
+
+if(xPos==0 && pongVal1!=yPos){
+matrix.beginDraw();
+matrix.textScrollSpeed(50);
+matrix.textFont(Font_5x7);
+matrix.beginText(0,1,255,0,0);
+matrix.println(message1);
+matrix.endText(SCROLL_LEFT);
+matrix.endDraw();
+Serial.print(xPos);
+Serial.print(" ");
+Serial.print(yPos);
+Serial.print(" ");
+Serial.println(pongVal1);
+}
+if(xPos==11 && pongVal2!=yPos){
+matrix.beginDraw();
+matrix.textScrollSpeed(50);
+matrix.textFont(Font_5x7);
+matrix.beginText(0,1,255,0,0);
+matrix.println(message2);
+matrix.endText(SCROLL_LEFT);
+matrix.endDraw();
+Serial.print(xPos);
+Serial.print(" ");
+Serial.print(yPos);
+Serial.print(" ");
+Serial.println(pongVal1);
+}
+}
+delay(dts);
+}
