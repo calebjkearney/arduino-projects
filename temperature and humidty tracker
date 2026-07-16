@@ -1,0 +1,78 @@
+https://youtube.com/shorts/RV8DsNkWgC0
+
+
+
+#include <DHT.h>
+#define DHTPIN 11
+#define DHTTYPE DHT11
+DHT myDHT(DHTPIN,DHTTYPE);
+#include "ArduinoGraphics.h"
+#include "Arduino_LED_Matrix.h"
+ArduinoLEDMatrix matrix;
+
+int br=115200;
+int setUpDelay=1000;
+int measDelay=500;
+int butPin=2;
+int butVal=1;
+int butValOld=1;
+int i;
+int j;
+
+float tempC;
+float tempF;
+float hum;
+float HIF;
+float HIC;
+
+byte frame[8][12];
+
+
+String message;
+
+void setup() {
+  // put your setup code here, to run once:
+pinMode(butPin,INPUT_PULLUP);
+Serial.begin(br);
+myDHT.begin();
+matrix.begin();
+delay(setUpDelay);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+//delay(measDelay);
+butVal=digitalRead(butPin);
+tempC=myDHT.readTemperature(false);
+tempF=myDHT.readTemperature(true);
+hum=myDHT.readHumidity();
+if(isnan(tempC) || isnan(tempF) || isnan(hum)){
+Serial.println("Failed to Read Data on DHT11 ");
+return;
+}
+for(i=0;i<=11;i=i+1){
+for(j=0;j<=7;j=j+1){
+frame[j][i]=0;
+}
+}
+HIC=myDHT.computeHeatIndex(tempC,hum,false);
+HIF=myDHT.computeHeatIndex(tempF,hum,true);
+message="      Temp: "+String(tempC)+" degrees C "+String(tempF)+" degrees F "+"Humidity: "+String(hum)+" % "+"Heat Index: "+String(HIC)+" degrees C "+String(HIF)+" degrees F      ";
+//Serial.println(message);
+Serial.print(butVal);
+Serial.print(" ");
+Serial.println(butValOld);
+
+if(butVal==1 && butValOld==0){
+matrix.beginDraw();
+matrix.textScrollSpeed(50);
+matrix.textFont(Font_5x7);
+matrix.beginText(0,1,255,0,0);
+matrix.println(message);
+matrix.endText(SCROLL_LEFT);
+matrix.endDraw();
+}
+
+butValOld=butVal;
+delay(measDelay);
+}
