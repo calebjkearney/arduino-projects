@@ -1,0 +1,21 @@
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(115200);
+int i=5;
+Serial.println("i="+String(i));
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+int a=1;
+if (a==1){
+int i=6;
+Serial.println(String(i));
+if (a==1){
+int i=7;
+Serial.println(String(i));
+}
+}
+while(true){}
+}
